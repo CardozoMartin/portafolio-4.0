@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
-import cv from '../../../public/cardozoMartinCv.pdf'
+
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -43,9 +43,9 @@ const Navbar = () => {
           <Link to={'contact'} className="text-white text-sm font-medium leading-normal" >Contacto</Link>
         </div>
         <a
-          href={cv}
+          href="/cardozoMartinCv.pdf"
           download
-          className="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-[#0d80f2] text-white text-sm font-bold leading-normal tracking-[0.015em]"
+          className="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-[#0d80f2] text-white text-base font-bold leading-normal tracking-[0.015em]"
         >
           <span className="truncate">CV</span>
         </a>
@@ -58,7 +58,7 @@ const Navbar = () => {
           <a className="text-white text-base font-medium leading-normal" href="#" onClick={() => setMenuOpen(false)}>Proyectos</a>
           <Link to={'contact'} className="text-white text-base font-medium leading-normal" onClick={() => setMenuOpen(false)}>Contacto</Link>
           <a
-            href="/cv.pdf"
+            href="/cardozoMartinCv.pdf"
             download
             className="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-[#0d80f2] text-white text-base font-bold leading-normal tracking-[0.015em]"
             onClick={() => setMenuOpen(false)}
