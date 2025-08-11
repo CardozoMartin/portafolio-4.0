@@ -139,7 +139,7 @@ const ProjectsSection = () => {
       ],
       videos: [
         {
-          url: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+          url: "",
           title: "Demo Completa",
           description: "Recorrido completo por todas las funcionalidades de la plataforma"
         }
@@ -202,7 +202,7 @@ const ProjectsSection = () => {
       ],
       videos: [
         {
-          url: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+          url: "",
           title: "Demo del Bot",
           description: "Demostración completa del flujo de ventas automatizado"
         }
@@ -266,7 +266,7 @@ const ProjectsSection = () => {
       ],
       videos: [
         {
-          url: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+          url: "",
           title: "Tour del Sistema",
           description: "Recorrido completo por todas las funcionalidades de GymManager"
         }
@@ -360,7 +360,7 @@ const ProjectsSection = () => {
       ],
       videos: [
         {
-          url: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+          url: "",
           title: "Como Funciona PetSafe",
           description: "Explicación del proceso de registro y recuperación"
         }
@@ -434,7 +434,7 @@ const ProjectsSection = () => {
       ],
       videos: [
         {
-          url: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+          url: "",
           title: "SalesPoint en Acción",
           description: "Demostración del flujo completo de ventas"
         }
@@ -590,7 +590,7 @@ const ProjectsSection = () => {
       ],
       videos: [
         {
-          url: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+          url: "",
           title: "DistriNort - Sistema omnicanal",
           description: "Demostración del flujo completo de ventas"
         }
