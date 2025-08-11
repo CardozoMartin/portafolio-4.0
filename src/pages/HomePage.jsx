@@ -8,15 +8,15 @@ import Footer from '../components/Common/Footer';
 const HomePage = () => {
     const skills = [
         "Web Development",
-        "Mobile Development",
+        "React Native",
         "Backend Development",
         "React",
         "Node.js",
-        "Swift",
-        "Kotlin",
+        "Express",
+        "TypeScript",
         "SQL",
         "NoSQL",
-        "Cloud Services"
+        "Render"
     ];
 
 

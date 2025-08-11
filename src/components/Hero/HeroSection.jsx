@@ -187,7 +187,7 @@ const HeroSection = () => {
               
               <h1 className="text-white text-4xl font-black leading-tight tracking-[-0.033em] @[480px]:text-5xl @[480px]:font-black @[480px]:leading-tight @[480px]:tracking-[-0.033em] relative">
                 <span className="bg-gradient-to-r from-white via-blue-200 to-purple-200 bg-clip-text text-transparent">
-                  Creando experiencias digitales
+                  Cardozo Martin Daniel
                 </span>
                 {/* Efecto de brillo */}
                 <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent opacity-20 transform skew-x-12 animate-pulse" 
@@ -196,7 +196,10 @@ const HeroSection = () => {
               </h1>
               
               <h2 className="text-white text-sm font-normal leading-normal @[480px]:text-base @[480px]:font-normal @[480px]:leading-normal mt-4 max-w-lg">
-                Soy un desarrollador versátil especializado en soluciones web, móviles y backend. 
+                Desarrollador Full Stack & Mobile | Apasionado por crear experiencias digitales excepcionales
+                <br />
+                Estudiante de Tecnicatura en Programación en la UTN Facultad Regional Tucuman
+                <br></br>
                 <span className="text-blue-300 font-medium"> Construyamos algo increíble juntos.</span>
               </h2>
             </div>

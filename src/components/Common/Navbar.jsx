@@ -1,9 +1,10 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
-
+import cv from '../../assets/cardozoMartinCV.pdf'
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
+
   return (
     <header className="flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#283039] px-4 md:px-10 py-3 relative z-20 bg-[#111418]">
       {/* Logo */}
@@ -41,26 +42,44 @@ const Navbar = () => {
           <a className="text-white text-sm font-medium leading-normal" href="#">Proyectos</a>
           <Link to={'contact'} className="text-white text-sm font-medium leading-normal" >Contacto</Link>
         </div>
-        <button
+        <a
+          href={cv}
+          download
           className="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-[#0d80f2] text-white text-sm font-bold leading-normal tracking-[0.015em]"
         >
           <span className="truncate">CV</span>
-        </button>
+        </a>
       </div>
 
       {/* Menú mobile desplegable */}
       {menuOpen && (
-        <div className="absolute top-full left-0 w-full bg-[#181d23] border-b border-[#283039] shadow-lg flex flex-col items-center py-4 gap-4 md:hidden animate-fade-in z-30">
+        <div className="absolute top-full left-0 w-full bg-[#181d23] border-b border-[#283039] shadow-2xl flex flex-col items-center py-6 gap-6 md:hidden animate-slide-down z-30 transition-all duration-300">
           <Link className="text-white text-base font-medium leading-normal" to={'/'} onClick={() => setMenuOpen(false)}>Inicio</Link>
           <a className="text-white text-base font-medium leading-normal" href="#" onClick={() => setMenuOpen(false)}>Proyectos</a>
           <Link to={'contact'} className="text-white text-base font-medium leading-normal" onClick={() => setMenuOpen(false)}>Contacto</Link>
-          <button
+          <a
+            href="/cv.pdf"
+            download
             className="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-[#0d80f2] text-white text-base font-bold leading-normal tracking-[0.015em]"
+            onClick={() => setMenuOpen(false)}
           >
-            <span className="truncate">CV</span>
-          </button>
+            <span className="truncate">Descargar CV</span>
+          </a>
         </div>
       )}
+
+      {/* Animación para el menú mobile */}
+      <style>
+        {`
+          @keyframes slide-down {
+            from { opacity: 0; transform: translateY(-20px);}
+            to { opacity: 1; transform: translateY(0);}
+          }
+          .animate-slide-down {
+            animation: slide-down 0.3s ease;
+          }
+        `}
+      </style>
     </header>
   );
 }
