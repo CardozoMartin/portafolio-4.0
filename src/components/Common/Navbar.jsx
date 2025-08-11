@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
-import cv from '../../assets/cardozoMartinCV.pdf'
+import cv from '../../../public/cardozoMartinCv.pdf'
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
