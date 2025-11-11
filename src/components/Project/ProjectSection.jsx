@@ -91,6 +91,7 @@ const ProjectsSection = () => {
         mientras mantiene la seguridad como prioridad principal. Cada componente ha sido optimizado 
         para ofrecer la mejor experiencia de usuario posible.
       `,
+      link: "https://bahiacc.netlify.app/",
       githubUrl: "https://github.com/CardozoMartin/bahia.-front",
       liveUrl: "https://joyeria-plataforma.vercel.app",
       technologies: ["React", "Node.js", "MongoDB", "MercadoPago API"],
@@ -225,6 +226,7 @@ const ProjectsSection = () => {
         ocupación de instalaciones y satisfacción de los clientes, permitiendo tomar decisiones 
         basadas en datos reales.
       `,
+      link: "https://gestiongym.netlify.app/",
       githubUrl: "https://github.com/CardozoMartin/Gym-Front",
       liveUrl: "https://gym-manager-demo.vercel.app",
       technologies: ["HTML", "CSS","JavaScript","Node.Js","MongoDB"],
@@ -290,6 +292,7 @@ const ProjectsSection = () => {
         cualquier persona puede escanear el código QR y acceder inmediatamente a la información 
         de contacto del dueño.
       `,
+      link: "https://petsqrv2.netlify.app",
       githubUrl: "https://github.com/CardozoMartin/petsqr2.0",
       liveUrl: "https://petsafe-qr.vercel.app",
       technologies: ["Reactjs", "Node.Js","Express","MongoDB"],
@@ -453,6 +456,7 @@ const ProjectsSection = () => {
         Sistema para facilitar la toma de pedidos mediante todos los canales de forma automatica pedidos en tiempo real por canales como whatsapp, web y en tienda. creando historial para todos los clientes reportes de ventas diarios y mensuales informacion de productos en stock y validando cada venta para no vender productos que no estan disponibles.
         Tambien agregamos un sistema de automatizacion por medio del canal telegram con N8N automatizando consultas para los administradores sin ingresar al sistema de productos con bajo stock pedidos realizados pedidos pendientes ventas realizadas cuanto se recaudo en el dia
       `,
+      link: "https://admindistrinort.netlify.app/",
       githubUrl: "https://github.com/CardozoMartin/distri-back",
       liveUrl: "https://admindistrinort.netlify.app/dashboard",
       technologies: ["React", "Tailwind", "JavaScript", "Express", "MongoDB","WebSocket","TypeScript","WhatsAppWeb.js","Nodemailer","Multer","Zustand"],

@@ -80,10 +80,24 @@ const ProjectDetailPage = () => {
       <section className="max-w-7xl mx-auto px-4 py-12">
         <div className="text-center mb-8">
           <h1 className="text-4xl md:text-5xl font-bold mb-4">{projectData.title}</h1>
-          <p className="text-[#9cabba] text-xl max-w-3xl mx-auto mb-6">
+          <p className="text-[#9cabba] text-xl max-w-3xl mx-auto mb-2">
             {projectData.shortDescription}
           </p>
-          
+          {projectData.link && (
+            <div className="mb-6">
+              <a 
+                href={projectData.link} 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-blue-400 hover:text-blue-300 inline-flex items-center gap-2 transition-colors duration-200"
+              >
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                </svg>
+                {projectData.link}
+              </a>
+            </div>
+          )}
           <div className="flex flex-wrap justify-center gap-4 text-sm">
             <span className={`px-3 py-1 rounded-full ${
               projectData.status === 'Completado' 
@@ -170,7 +184,7 @@ const ProjectDetailPage = () => {
                       alt={projectData.images[activeImageIndex].title}
                       className="w-full h-full object-cover"
                       onError={(e) => {
-                        e.target.src = projectData.image; // Fallback a la imagen principal
+                        e.target.src = projectData.image;
                       }}
                     />
                   </div>
