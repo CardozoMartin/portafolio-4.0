@@ -1,87 +1,162 @@
-import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
-
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 50);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const navItems = [
+    { name: 'Inicio', path: '/', id: 'home' },
+    { name: 'Proyectos', path: '/#projects', id: 'projects' },
+    { name: 'Contacto', path: '/contact', id: 'contact' }
+  ];
 
   return (
-    <header className="flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#283039] px-4 md:px-10 py-3 relative z-20 bg-[#111418]">
-      {/* Logo */}
-      <div className="flex items-center gap-4 text-white">
-        <div className="size-4">
-          <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path
-              d="M24 45.8096C19.6865 45.8096 15.4698 44.5305 11.8832 42.134C8.29667 39.7376 5.50128 36.3314 3.85056 32.3462C2.19985 28.361 1.76794 23.9758 2.60947 19.7452C3.451 15.5145 5.52816 11.6284 8.57829 8.5783C11.6284 5.52817 15.5145 3.45101 19.7452 2.60948C23.9758 1.76795 28.361 2.19986 32.3462 3.85057C36.3314 5.50129 39.7376 8.29668 42.134 11.8833C44.5305 15.4698 45.8096 19.6865 45.8096 24L24 24L24 45.8096Z"
-              fill="currentColor"
-            ></path>
-          </svg>
-        </div>
-        <h2 className="text-white text-lg font-bold leading-tight tracking-[-0.015em]">Cardozo Martin Dev</h2>
-      </div>
+    <motion.header
+      initial={{ y: -100 }}
+      animate={{ y: 0 }}
+      transition={{ type: 'spring', stiffness: 100 }}
+      className={`
+        fixed top-0 left-0 right-0 z-50 transition-all duration-300
+        ${scrolled 
+          ? 'bg-[#111418]/80 backdrop-blur-xl border-b border-white/10 shadow-lg' 
+          : 'bg-transparent'
+        }
+      `}
+    >
+      <div className="max-w-7xl mx-auto px-6 py-4">
+        <div className="flex items-center justify-between">
+          {/* Logo */}
+          <Link to="/" className="flex items-center gap-3 group">
+            <motion.div
+              whileHover={{ rotate: 360 }}
+              transition={{ duration: 0.6 }}
+              className="relative"
+            >
+              <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center">
+                <span className="text-white font-bold text-xl">M</span>
+              </div>
+              <div className="absolute inset-0 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg blur-lg opacity-50 group-hover:opacity-75 transition-opacity" />
+            </motion.div>
+            <div className="hidden md:block">
+              <h2 className="text-white font-bold text-lg leading-tight">
+                Martin Cardozo
+              </h2>
+              <p className="text-white/50 text-xs">Full Stack Developer</p>
+            </div>
+          </Link>
 
-      {/* Botón menú mobile */}
-      <button
-        className="md:hidden flex items-center justify-center ml-2 p-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-400"
-        onClick={() => setMenuOpen(!menuOpen)}
-        aria-label="Abrir menú"
-      >
-        <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-          {menuOpen ? (
-            <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-          ) : (
-            <path strokeLinecap="round" strokeLinejoin="round" d="M4 8h16M4 16h16" />
-          )}
-        </svg>
-      </button>
+          {/* Desktop Menu */}
+          <nav className="hidden md:flex items-center gap-8">
+            {navItems.map((item) => (
+              <Link
+                key={item.id}
+                to={item.path}
+                className="relative text-white/80 hover:text-white text-sm font-medium transition-colors group"
+              >
+                {item.name}
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-400 to-purple-400 group-hover:w-full transition-all duration-300" />
+              </Link>
+            ))}
+          </nav>
 
-      {/* Menú desktop */}
-      <div className="hidden md:flex flex-1 justify-end gap-8">
-        <div className="flex items-center gap-9">
-          <Link className="text-white text-sm font-medium leading-normal" to={'/'}>Inicio</Link>
-          <a className="text-white text-sm font-medium leading-normal" href="#">Proyectos</a>
-          <Link to={'contact'} className="text-white text-sm font-medium leading-normal" >Contacto</Link>
-        </div>
-        <a
-          href="/cardozoMartinCv.pdf"
-          download
-          className="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-[#0d80f2] text-white text-base font-bold leading-normal tracking-[0.015em]"
-        >
-          <span className="truncate">CV</span>
-        </a>
-      </div>
+          {/* CTA Button Desktop */}
+          <div className="hidden md:flex items-center gap-4">
+            <a
+              href="/cardozoMartinCv.pdf"
+              download
+              className="group relative px-6 py-2.5 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full text-white font-semibold overflow-hidden transition-all hover:shadow-lg hover:shadow-blue-500/25"
+            >
+              <span className="relative z-10 flex items-center gap-2">
+                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                </svg>
+                CV
+              </span>
+              <div className="absolute inset-0 bg-gradient-to-r from-purple-600 to-blue-500 opacity-0 group-hover:opacity-100 transition-opacity" />
+            </a>
+          </div>
 
-      {/* Menú mobile desplegable */}
-      {menuOpen && (
-        <div className="absolute top-full left-0 w-full bg-[#181d23] border-b border-[#283039] shadow-2xl flex flex-col items-center py-6 gap-6 md:hidden animate-slide-down z-30 transition-all duration-300">
-          <Link className="text-white text-base font-medium leading-normal" to={'/'} onClick={() => setMenuOpen(false)}>Inicio</Link>
-          <a className="text-white text-base font-medium leading-normal" href="#" onClick={() => setMenuOpen(false)}>Proyectos</a>
-          <Link to={'contact'} className="text-white text-base font-medium leading-normal" onClick={() => setMenuOpen(false)}>Contacto</Link>
-          <a
-            href="/cardozoMartinCv.pdf"
-            download
-            className="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-[#0d80f2] text-white text-base font-bold leading-normal tracking-[0.015em]"
-            onClick={() => setMenuOpen(false)}
+          {/* Mobile Menu Button */}
+          <button
+            onClick={() => setMenuOpen(!menuOpen)}
+            className="md:hidden relative w-10 h-10 flex items-center justify-center rounded-lg bg-white/5 border border-white/10 hover:bg-white/10 transition-colors"
+            aria-label="Toggle menu"
           >
-            <span className="truncate">Descargar CV</span>
-          </a>
+            <div className="flex flex-col gap-1.5">
+              <motion.span
+                animate={menuOpen ? { rotate: 45, y: 6 } : { rotate: 0, y: 0 }}
+                className="w-5 h-0.5 bg-white rounded-full"
+              />
+              <motion.span
+                animate={menuOpen ? { opacity: 0 } : { opacity: 1 }}
+                className="w-5 h-0.5 bg-white rounded-full"
+              />
+              <motion.span
+                animate={menuOpen ? { rotate: -45, y: -6 } : { rotate: 0, y: 0 }}
+                className="w-5 h-0.5 bg-white rounded-full"
+              />
+            </div>
+          </button>
         </div>
-      )}
+      </div>
 
-      {/* Animación para el menú mobile */}
-      <style>
-        {`
-          @keyframes slide-down {
-            from { opacity: 0; transform: translateY(-20px);}
-            to { opacity: 1; transform: translateY(0);}
-          }
-          .animate-slide-down {
-            animation: slide-down 0.3s ease;
-          }
-        `}
-      </style>
-    </header>
+      {/* Mobile Menu */}
+      <AnimatePresence>
+        {menuOpen && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.3 }}
+            className="md:hidden overflow-hidden bg-[#111418]/95 backdrop-blur-xl border-t border-white/10"
+          >
+            <nav className="px-6 py-6 flex flex-col gap-4">
+              {navItems.map((item, index) => (
+                <motion.div
+                  key={item.id}
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: index * 0.1 }}
+                >
+                  <Link
+                    to={item.path}
+                    onClick={() => setMenuOpen(false)}
+                    className="block px-4 py-3 text-white/80 hover:text-white hover:bg-white/5 rounded-lg transition-all font-medium"
+                  >
+                    {item.name}
+                  </Link>
+                </motion.div>
+              ))}
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: navItems.length * 0.1 }}
+              >
+                <a
+                  href="/cardozoMartinCv.pdf"
+                  download
+                  onClick={() => setMenuOpen(false)}
+                  className="block px-4 py-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-lg font-semibold text-center"
+                >
+                  Descargar CV
+                </a>
+              </motion.div>
+            </nav>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </motion.header>
   );
-}
+};
 
-export default Navbar
+export default Navbar;

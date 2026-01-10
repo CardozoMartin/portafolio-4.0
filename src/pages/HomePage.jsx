@@ -1,44 +1,48 @@
 import React from 'react'
 import HeroSection from '../components/Hero/HeroSection'
-
 import ProjectsSection from '../components/Project/ProjectSection';
 import AboutSection from '../components/Hero/AboutSection';
 import Footer from '../components/Common/Footer';
 
 const HomePage = () => {
     const skills = [
-        "Web Development",
-        "React Native",
-        "Backend Development",
-        "React",
-        "Node.js",
-        "Express",
-        "TypeScript",
-        "SQL",
-        "NoSQL",
-        "Render"
+        "React", "React Native", "Node.js", "Express", "TypeScript", 
+        "JavaScript", "MongoDB", "PostgreSQL", "MySQL", "Git",
+        "Tailwind CSS", "REST APIs", "Docker", "AWS"
     ];
 
-
-
     return (
-        <div className="relative flex size-full min-h-screen flex-col bg-[#111418] dark group/design-root overflow-x-hidden" >
+        <div className="relative flex size-full min-h-screen flex-col bg-[#111418] dark group/design-root overflow-x-hidden pt-20">
             <div className="layout-container flex h-full grow flex-col">
-
-                <div className="px-4 md:px-40 flex flex-1 justify-center py-5 w-full">
-                    <div className="layout-content-container flex flex-col max-w-[960px] w-full flex-1">
+                <div className="w-full">
+                    <div className="layout-content-container flex flex-col w-full">
+                        {/* Hero Section */}
                         <HeroSection />
+                        
+                        {/* About Section */}
                         <AboutSection />
-                        <div>
-                            <h2 className="text-white text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">Skills</h2>
-                            <div className="flex gap-3 p-3 flex-wrap pr-4">
-                                {skills.map((skill, index) => (
-                                    <div key={index} className="flex h-8 shrink-0 items-center justify-center gap-x-2 rounded-lg bg-[#283039] pl-4 pr-4">
-                                        <p className="text-white text-sm font-medium leading-normal">{skill}</p>
-                                    </div>
-                                ))}
+                        
+                        {/* Skills Section */}
+                        <section className="w-full py-16 px-4">
+                            <div className="max-w-6xl mx-auto">
+                                <h2 className="text-4xl md:text-5xl font-bold text-white mb-12 text-center">
+                                    Habilidades <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">&amp; Tecnologías</span>
+                                </h2>
+                                <div className="flex flex-wrap justify-center gap-4">
+                                    {skills.map((skill, index) => (
+                                        <div 
+                                            key={index} 
+                                            className="group relative px-6 py-3 bg-white/5 border border-white/10 rounded-full backdrop-blur-sm hover:bg-white/10 hover:border-white/20 transition-all duration-300 hover:scale-105"
+                                        >
+                                            <p className="text-white font-medium relative z-10">{skill}</p>
+                                            <div className="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-full opacity-0 group-hover:opacity-100 transition-opacity blur-xl" />
+                                        </div>
+                                    ))}
+                                </div>
                             </div>
-                        </div>
+                        </section>
+                        
+                        {/* Projects Section */}
                         <ProjectsSection />
                     </div>
                 </div>
