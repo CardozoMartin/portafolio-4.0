@@ -96,8 +96,8 @@ const ContactForm = () => {
         </svg>
       ),
       label: 'Email',
-      value: 'carlos.sanchez@email.com',
-      href: 'mailto:carlos.sanchez@email.com'
+      value: 'martindanielcardozo52@gmail.com',
+      href: 'mailto:martindanielcardozo52@gmail.com'
     },
     {
       icon: (
@@ -106,8 +106,8 @@ const ContactForm = () => {
         </svg>
       ),
       label: 'LinkedIn',
-      value: 'linkedin.com/in/carlos-sanchez',
-      href: 'https://linkedin.com/in/carlos-sanchez'
+      value: 'linkedin.com/in/cardozomartindaniel',
+      href: 'https://www.linkedin.com/in/cardozomartindaniel'
     },
     {
       icon: (
@@ -116,8 +116,8 @@ const ContactForm = () => {
         </svg>
       ),
       label: 'GitHub',
-      value: 'github.com/carlos-sanchez',
-      href: 'https://github.com/carlos-sanchez'
+      value: 'github.com/CardozoMartin',
+      href: 'https://github.com/CardozoMartin'
     }
   ];
 

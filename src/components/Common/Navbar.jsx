@@ -16,9 +16,18 @@ const Navbar = () => {
 
   const navItems = [
     { name: 'Inicio', path: '/', id: 'home' },
-    { name: 'Proyectos', path: '/#projects', id: 'projects' },
+    { name: 'Proyectos', path: '/', scrollTo: 'projects', id: 'projects' },
     { name: 'Contacto', path: '/contact', id: 'contact' }
   ];
+
+  const handleNavClick = (item) => {
+    if (item.scrollTo) {
+      const element = document.getElementById(item.scrollTo);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+  };
 
   return (
     <motion.header
@@ -61,6 +70,7 @@ const Navbar = () => {
               <Link
                 key={item.id}
                 to={item.path}
+                onClick={() => handleNavClick(item)}
                 className="relative text-white/80 hover:text-white text-sm font-medium transition-colors group"
               >
                 {item.name}
@@ -130,7 +140,10 @@ const Navbar = () => {
                 >
                   <Link
                     to={item.path}
-                    onClick={() => setMenuOpen(false)}
+                    onClick={() => {
+                      handleNavClick(item);
+                      setMenuOpen(false);
+                    }}
                     className="block px-4 py-3 text-white/80 hover:text-white hover:bg-white/5 rounded-lg transition-all font-medium"
                   >
                     {item.name}

@@ -36,7 +36,9 @@ const HomePage = () => {
             {/* Skills Section */}
 
             {/* Projects Section */}
-            <ProjectsSection />
+            <div id="projects">
+              <ProjectsSection />
+            </div>
           </div>
         </div>
         <Footer />
