@@ -5,9 +5,20 @@ import TechCarousel from './TechCarousel';
 
 const BackendHero = () => {
   const [typedText, setTypedText] = useState('');
+  const [isMobile, setIsMobile] = useState(false);
   const heroRef = useRef(null);
 
-  // Código flotante en el fondo
+  // Detectar si es mobile
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  // Código flotante en el fondo - reducido para mobile
   const codeSnippets = [
     'const server = express();',
     'app.listen(3000);',
@@ -15,12 +26,6 @@ const BackendHero = () => {
     'async/await',
     'JWT.sign(payload);',
     'bcrypt.hash(password);',
-    'router.post("/api");',
-    'middleware(req, res);',
-    'try { } catch(e) { }',
-    'Promise.all([])',
-    'socket.on("connect")',
-    'redis.set(key, value)',
   ];
 
   // Efecto de tipeo
@@ -51,11 +56,11 @@ const BackendHero = () => {
         <div className="absolute inset-0 bg-gradient-to-br from-slate-950 via-slate-900 to-slate-800" />
         <div className="absolute inset-0 bg-gradient-to-t from-purple-950/30 via-transparent to-blue-950/30" />
         
-        {/* Animación de estrellas */}
-        <StarField />
+        {/* Animación de estrellas - deshabilitada en mobile */}
+        {!isMobile && <StarField />}
         
-        {/* Líneas de código flotantes con menor opacidad */}
-        {codeSnippets.map((code, i) => (
+        {/* Líneas de código flotantes - solo en desktop */}
+        {!isMobile && codeSnippets.map((code, i) => (
           <motion.div
             key={i}
             className="absolute text-emerald-500/10 font-mono text-sm md:text-base whitespace-nowrap"
@@ -78,14 +83,14 @@ const BackendHero = () => {
           </motion.div>
         ))}
 
-        {/* Grid tecnológico con efecto de respiración más fuerte */}
+        {/* Grid tecnológico con efecto de respiración - más simple en mobile */}
         <motion.div 
           className="absolute inset-0 pointer-events-none"
           animate={{
-            opacity: [0, 0.2, 0],
+            opacity: isMobile ? [0.05, 0.1, 0.05] : [0, 0.2, 0],
           }}
           transition={{
-            duration: 5,
+            duration: isMobile ? 8 : 5,
             repeat: Infinity,
             ease: "easeInOut",
           }}
@@ -102,58 +107,64 @@ const BackendHero = () => {
           />
         </motion.div>
 
-        {/* Orbes de luz más dramáticos */}
+        {/* Orbes de luz - simplificados en mobile */}
         <motion.div
-          className="absolute top-1/4 left-1/4 w-[500px] h-[500px] rounded-full blur-3xl"
+          className={`absolute top-1/4 left-1/4 ${isMobile ? 'w-[200px] h-[200px]' : 'w-[500px] h-[500px]'} rounded-full blur-3xl`}
           style={{
             background: 'radial-gradient(circle, rgba(16, 185, 129, 0.3) 0%, transparent 70%)',
           }}
-          animate={{
+          animate={isMobile ? {
+            opacity: [0.2, 0.4, 0.2],
+          } : {
             scale: [1, 1.3, 1],
             opacity: [0.4, 0.6, 0.4],
             x: [0, 50, 0],
             y: [0, 30, 0],
           }}
           transition={{
-            duration: 12,
+            duration: isMobile ? 10 : 12,
             repeat: Infinity,
             ease: "easeInOut",
           }}
         />
 
         <motion.div
-          className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] rounded-full blur-3xl"
+          className={`absolute bottom-1/4 right-1/4 ${isMobile ? 'w-[200px] h-[200px]' : 'w-[500px] h-[500px]'} rounded-full blur-3xl`}
           style={{
             background: 'radial-gradient(circle, rgba(139, 92, 246, 0.25) 0%, transparent 70%)',
           }}
-          animate={{
+          animate={isMobile ? {
+            opacity: [0.2, 0.3, 0.2],
+          } : {
             scale: [1.3, 1, 1.3],
             opacity: [0.3, 0.5, 0.3],
             x: [0, -50, 0],
             y: [0, -30, 0],
           }}
           transition={{
-            duration: 15,
+            duration: isMobile ? 12 : 15,
             repeat: Infinity,
             ease: "easeInOut",
           }}
         />
         
-        <motion.div
-          className="absolute top-1/2 right-1/3 w-[400px] h-[400px] rounded-full blur-3xl"
-          style={{
-            background: 'radial-gradient(circle, rgba(59, 130, 246, 0.2) 0%, transparent 70%)',
-          }}
-          animate={{
-            scale: [1, 1.2, 1],
-            opacity: [0.2, 0.4, 0.2],
-          }}
-          transition={{
-            duration: 10,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
-        />
+        {!isMobile && (
+          <motion.div
+            className="absolute top-1/2 right-1/3 w-[400px] h-[400px] rounded-full blur-3xl"
+            style={{
+              background: 'radial-gradient(circle, rgba(59, 130, 246, 0.2) 0%, transparent 70%)',
+            }}
+            animate={{
+              scale: [1, 1.2, 1],
+              opacity: [0.2, 0.4, 0.2],
+            }}
+            transition={{
+              duration: 10,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+          />
+        )}
       </div>
 
       {/* Contenido Principal */}

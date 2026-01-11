@@ -1,7 +1,18 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 
 const TechCarousel = () => {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
   const technologies = [
     { name: 'JavaScript', icon: '⚡' },
     { name: 'TypeScript', icon: '📘' },
@@ -21,18 +32,20 @@ const TechCarousel = () => {
     { name: 'Postman', icon: '📮' },
   ];
 
-  // Duplicamos las tecnologías para el efecto infinito
-  const duplicatedTechs = [...technologies, ...technologies, ...technologies];
+  // Duplicamos menos veces en mobile
+  const duplicatedTechs = isMobile 
+    ? [...technologies, ...technologies]
+    : [...technologies, ...technologies, ...technologies];
 
   return (
     <div className="relative w-full py-8">
       <div className="text-emerald-400/70 text-sm font-mono uppercase tracking-wider mb-8 text-center">
-        Backend Stack
+        Tech Stack
       </div>
 
       {/* Contenedor con overflow hidden */}
       <div className="overflow-hidden">
-        {/* Carrusel */}
+        {/* Carrusel - más lento en mobile */}
         <motion.div
           className="flex gap-6 sm:gap-8 md:gap-12"
           animate={{
@@ -42,7 +55,7 @@ const TechCarousel = () => {
             x: {
               repeat: Infinity,
               repeatType: "loop",
-              duration: 25,
+              duration: isMobile ? 35 : 25,
               ease: "linear",
             },
           }}
@@ -52,13 +65,12 @@ const TechCarousel = () => {
               key={`${tech.name}-${index}`}
               className="flex-shrink-0 flex flex-col items-center justify-center gap-2 w-16 sm:w-20 md:w-24"
             >
-              <motion.div
-                className="text-4xl sm:text-5xl md:text-6xl filter grayscale hover:grayscale-0 transition-all duration-300 cursor-pointer"
-                whileHover={{ scale: 1.0, filter: "grayscale(0%)" }}
+              <div
+                className="text-4xl sm:text-5xl md:text-6xl filter grayscale transition-all duration-300"
                 title={tech.name}
               >
                 {tech.icon}
-              </motion.div>
+              </div>
               <span className="text-emerald-400/60 text-xs font-mono hidden sm:block">
                 {tech.name}
               </span>
